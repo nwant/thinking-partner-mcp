@@ -1,0 +1,30 @@
+{
+  "name": "thinking-partner-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for unified AI thinking partner across Claude Desktop and Code",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "setup-desktop": "node scripts/setup-desktop.js",
+    "setup-code": "node scripts/setup-code.js",
+    "test": "node scripts/test-server.js",
+    "diagnose": "node scripts/diagnose.js",
+    "logs": "node scripts/check-logs.js",
+    "troubleshoot": "node scripts/troubleshoot.js",
+    "deep-debug": "node scripts/deep-debug.js",
+    "simple-test": "node scripts/simple-test.js",
+    "mcp-logs": "node scripts/check-mcp-logs.js",
+    "quick-fix": "node scripts/quick-fix.js"
+  },
+  "keywords": ["mcp", "claude", "thinking-partner", "ai", "productivity"],
+  "author": "Nathan",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
