@@ -45,3 +45,9 @@ The project uses a custom test runner (`scripts/test-server.js`) that:
 4. Tests both successful operations and error cases
 
 Run tests with: `npm test`
+
+## Security Reminders
+- Make sure no sensitive information is added to the git repository
+
+## Memories
+- Build everything in node

@@ -70,6 +70,17 @@ export function createTools(storage) {
         message: `Conversation bridged from ${from_tool} to ${to_tool}`,
         bridge
       };
+    },
+
+    async get_focus_history({ limit = 10 }) {
+      const history = await storage.getFocusHistory(limit);
+      
+      return {
+        success: true,
+        message: `Retrieved ${history.length} focus entries`,
+        currentFocus: await storage.getCurrentFocus(),
+        history
+      };
     }
   };
 }

@@ -16,7 +16,9 @@
     "deep-debug": "node scripts/deep-debug.js",
     "simple-test": "node scripts/simple-test.js",
     "mcp-logs": "node scripts/check-mcp-logs.js",
-    "quick-fix": "node scripts/quick-fix.js"
+    "quick-fix": "node scripts/quick-fix.js",
+    "test:focus": "node scripts/test-focus-history.js",
+    "cleanup:test": "node scripts/cleanup-test-data.js"
   },
   "keywords": ["mcp", "claude", "thinking-partner", "ai", "productivity"],
   "author": "Nathan",

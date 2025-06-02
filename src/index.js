@@ -96,6 +96,16 @@ class ThinkingPartnerServer {
             },
             required: ['from_tool', 'to_tool', 'summary']
           }
+        },
+        {
+          name: 'get_focus_history',
+          description: 'Get history of previous focus topics',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              limit: { type: 'number', description: 'Maximum number of focus entries to return', default: 10 }
+            }
+          }
         }
       ]
     }));

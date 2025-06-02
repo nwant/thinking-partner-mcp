@@ -8,9 +8,14 @@ const __dirname = dirname(__filename);
 
 export class Storage {
   constructor() {
-    // Use the project root directory based on this file's location
-    const projectRoot = dirname(__dirname);
-    this.dataPath = join(projectRoot, 'data', 'context.json');
+    // Check for test data path override
+    if (process.env.MCP_TEST_DATA_PATH) {
+      this.dataPath = process.env.MCP_TEST_DATA_PATH;
+    } else {
+      // Use the project root directory based on this file's location
+      const projectRoot = dirname(__dirname);
+      this.dataPath = join(projectRoot, 'data', 'context.json');
+    }
     this.ensureDataDir();
   }
 
@@ -127,6 +132,11 @@ export class Storage {
       conversationBridges: data.conversations.bridges.slice(0, 5)
     };
 
+    // Include focus history when scope is 'all'
+    if (scope === 'all') {
+      context.focusHistory = data.focusHistory.slice(0, 10);
+    }
+
     // Add tool-specific context
     if (tool === 'code' && data.currentFocus) {
       // For Code, emphasize implementation-relevant decisions
@@ -157,5 +167,10 @@ export class Storage {
   async getRecentDecisions() {
     const data = await this.load();
     return data.decisions.slice(0, 10);
+  }
+
+  async getFocusHistory(limit = 10) {
+    const data = await this.load();
+    return data.focusHistory.slice(0, limit);
   }
 }
