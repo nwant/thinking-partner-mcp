@@ -110,6 +110,29 @@ thinking-partner-mcp/
 
 The setup scripts automatically configure both Claude Desktop and Claude Code to use this MCP server. The server runs locally and maintains persistent context in `data/context.json`.
 
+### Git Sync Configuration
+
+The server supports automatic Git synchronization to share context across multiple machines:
+
+```bash
+# Copy example environment file
+cp .env.example .env
+
+# Edit .env to add your Git repository
+THINKING_PARTNER_GIT_REMOTE=git@github.com:yourusername/thinking-partner-data.git
+```
+
+Environment variables:
+- `THINKING_PARTNER_GIT_SYNC`: Enable/disable Git sync (default: true)
+- `THINKING_PARTNER_AUTO_SYNC`: Enable/disable automatic sync on save (default: true)  
+- `THINKING_PARTNER_GIT_REMOTE`: Git repository URL for syncing data
+
+The server will automatically:
+- Initialize a Git repository in the data directory
+- Pull before reading context data
+- Commit and push after saving changes
+- Handle merge conflicts by preserving the most recent data
+
 ## Example Usage
 
 **Desktop Session:**

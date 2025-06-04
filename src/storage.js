@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import GitSync from './git-sync.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,6 +18,16 @@ export class Storage {
       this.dataPath = join(projectRoot, 'data', 'context.json');
     }
     this.ensureDataDir();
+    
+    // Initialize Git sync
+    const dataDir = dirname(this.dataPath);
+    this.gitSync = new GitSync({
+      dataPath: dataDir,
+      enabled: process.env.THINKING_PARTNER_GIT_SYNC !== 'false',
+      autoSync: process.env.THINKING_PARTNER_AUTO_SYNC !== 'false',
+      remote: process.env.THINKING_PARTNER_GIT_REMOTE
+    });
+    this.gitSync.init();
   }
 
   async ensureDataDir() {
@@ -28,6 +39,9 @@ export class Storage {
 
   async load() {
     try {
+      // Pull latest changes before reading
+      await this.gitSync.pull();
+      
       if (!existsSync(this.dataPath)) {
         return this.getDefaultData();
       }
@@ -42,6 +56,9 @@ export class Storage {
   async save(data) {
     try {
       await writeFile(this.dataPath, JSON.stringify(data, null, 2));
+      
+      // Auto-commit and sync changes
+      await this.gitSync.sync('Update context data');
     } catch (error) {
       console.error('Error saving data:', error);
       throw error;

@@ -5,7 +5,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Runtime data
-data/context.json
+data/
 *.log
 
 # Environment variables
