@@ -2,15 +2,6 @@
 
 A Model Context Protocol (MCP) server that creates a unified AI thinking partner across Claude Desktop and Claude Code. This enables seamless context sharing and conversation continuity between architectural thinking and implementation work.
 
-## The Bonsai Philosophy
-
-This tool embodies the bonsai approach to AI development - patient cultivation of a cognitive partnership that grows more valuable over time through:
-
-- **Natural Growth**: Context builds organically through your work
-- **Intentional Shaping**: Deliberate capture of decisions and discoveries  
-- **Persistent Memory**: Never lose the reasoning behind your choices
-- **Cross-Tool Continuity**: One thinking partner across your entire toolkit
-
 ## Quick Start
 
 ```bash
